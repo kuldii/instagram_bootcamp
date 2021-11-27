@@ -1,9 +1,14 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import './color.dart';
 import './widgets/profile_info.dart';
 import './controllers/ig_controller.dart';
+
+import './pages/page_1.dart';
+import './pages/page_2.dart';
+import './pages/page_3.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,8 +19,172 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: HomePage(),
+    return GetMaterialApp(
+      home: DropDownPage(),
+      routes: {
+        PageSatu.routeName: (context) => PageSatu(),
+        PageDua.routeName: (context) => PageDua(),
+        PageTiga.routeName: (context) => PageTiga(),
+      },
+    );
+  }
+}
+
+class DropDownPage extends StatefulWidget {
+  const DropDownPage({Key? key}) : super(key: key);
+
+  @override
+  State<DropDownPage> createState() => _DropDownPageState();
+}
+
+class _DropDownPageState extends State<DropDownPage> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  List<Widget> _widgetOptions = [
+    Center(
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: DropdownSearch(
+          mode: Mode.MENU,
+          showClearButton: true,
+          items: ["Sumanto", "Panjul", "Tugimin"],
+          onChanged: (value) {},
+        ),
+      ),
+    ),
+    PageSatu(),
+    PageDua(),
+    PageTiga(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: _widgetOptions.elementAt(_selectedIndex),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.blue,
+        fixedColor: Colors.green,
+        currentIndex: _selectedIndex,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+              color: appBlack,
+            ),
+            label: "HOME",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.power_off,
+              color: appBlack,
+            ),
+            label: "POWER",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.add,
+              color: appBlack,
+            ),
+            label: "ADD",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.logout,
+              color: appBlack,
+            ),
+            label: "LOGOUT",
+          ),
+        ],
+        onTap: (value) => _onItemTapped(value),
+      ),
+    );
+  }
+}
+
+class DrawerPage extends StatelessWidget {
+  const DrawerPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("DRAWER"),
+      ),
+      drawer: Drawer(
+        child: SafeArea(
+          child: ListView(
+            children: <Widget>[
+              DrawerHeader(
+                child: Container(
+                  color: Colors.amber,
+                ),
+              ),
+              const Text('This is \n\n\n\n\n\n\nthe Drawer'),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text('Close Drawer'),
+              ),
+              const Text('This is \n\n\n\n\n\n\nthe Drawer'),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text('Close Drawer'),
+              ),
+              const Text('This is \n\n\n\n\n\n\nthe Drawer'),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text('Close Drawer'),
+              ),
+              const Text('This is \n\n\n\n\n\n\nthe Drawer'),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text('Close Drawer'),
+              ),
+              const Text('This is \n\n\n\n\n\n\nthe Drawer'),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text('Close Drawer'),
+              ),
+              const Text('This is \n\n\n\n\n\n\nthe Drawer'),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text('Close Drawer'),
+              ),
+              const Text('This is \n\n\n\n\n\n\nthe Drawer'),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text('Close Drawer'),
+              ),
+              const Text('This is \n\n\n\n\n\n\nthe Drawer'),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text('Close Drawer'),
+              ),
+              const Text('This is \n\n\n\n\n\n\nthe Drawer'),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text('Close Drawer'),
+              ),
+              const Text('This is \n\n\n\n\n\n\nthe Drawer'),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text('Close Drawer'),
+              ),
+              const Text('This is \n\n\n\n\n\n\nthe Drawer'),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text('Close Drawer'),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
