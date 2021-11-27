@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import './color.dart';
 import './widgets/profile_info.dart';
+import './controllers/ig_controller.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,37 +15,31 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: InstagramPage(),
+      home: HomePage(),
     );
   }
 }
 
-class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+class HomePage extends StatelessWidget {
+  // final List<Widget> myTabs = [
+  //   Tab(
+  //     icon: Icon(
+  //       Icons.ac_unit_outlined,
+  //       color: appBlack,
+  //     ),
+  //   ),
+  //   Tab(
+  //     icon: Icon(
+  //       Icons.grid_3x3,
+  //       color: appBlack,
+  //     ),
+  //   ),
+  // ];
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  final List<Widget> myTabs = [
-    Tab(
-      icon: Icon(
-        Icons.ac_unit_outlined,
-        color: appBlack,
-      ),
-    ),
-    Tab(
-      icon: Icon(
-        Icons.grid_3x3,
-        color: appBlack,
-      ),
-    ),
-  ];
+  final igC = Get.put(IgController());
 
   @override
   Widget build(BuildContext context) {
-    TabController tabC = TabController(length: myTabs.length, vsync: this);
     return Scaffold(
       appBar: AppBar(
         title: Text("Haloo"),
@@ -55,14 +51,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             color: Colors.amber,
           ),
           TabBar(
-            controller: tabC,
-            tabs: myTabs,
+            controller: igC.tabC,
+            tabs: igC.myTabs,
             indicatorColor: appBlack,
             unselectedLabelColor: Colors.purple,
           ),
           Expanded(
             child: TabBarView(
-              controller: tabC,
+              controller: igC.tabC,
               children: [
                 Center(
                   child: Text(
